@@ -34,7 +34,10 @@
         "handle": "calendarize",
         "documentationUrl": "https://github.com/unionco/calendarize/blob/master/README.md",
         "changelogUrl": "https://raw.githubusercontent.com/unionco/calendarize/master/CHANGELOG.md",
-        "class": "unionco\\calendarize\\Calendarize"
+        "class": "unionco\\calendarize\\Calendarize",
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
