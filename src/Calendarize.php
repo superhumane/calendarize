@@ -82,14 +82,11 @@ class Calendarize extends Plugin
     {
         parent::init();
         self::$plugin = $this;
-
-        $this->controllerNamespace = 'unionco\calendarize\controllers';
-
+        $this->controllerNamespace = 'unionco\\calendarize\\controllers';
         $this->setComponents([
             'calendar' => CalendarizeService::class,
             'ics' => ICS::class
         ]);
-
         // Base template directory
         Event::on(
             View::class,
@@ -100,7 +97,6 @@ class Calendarize extends Plugin
                 }
             }
         );
-
         Event::on(
             Fields::class,
             Fields::EVENT_REGISTER_FIELD_TYPES,
@@ -108,50 +104,15 @@ class Calendarize extends Plugin
                 $event->types[] = CalendarizeField::class;
             }
         );
-
         Event::on(
             CraftVariable::class,
-            CraftVariable::EVENT_INIT,
+            CraftVariable::EVENT_DEFINE_BEHAVIORS,
             function (Event $event) {
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
                 $variable->set('calendarize', CalendarizeVariable::class);
             }
         );
-
-        /**
-         * Adding Sort Options
-         */
-        // Event::on(
-        //     Entry::class, 
-        //     Element::EVENT_REGISTER_SORT_OPTIONS, 
-        //     function(RegisterElementSortOptionsEvent $event) {
-        //         $event->sortOptions[] = [
-        //             'label' => 'Calendarize | Start Date',
-        //             'orderBy' => 'calendarize.startDate'
-        //         ];
-        //     }
-        // );
-
-        /**
-         * Modifying query when sorting by calendarize
-         */
-        // Event::on(
-        //     ElementQuery::class,
-        //     ElementQuery::EVENT_BEFORE_PREPARE,
-        //     function(CancelableEvent $event) {
-        //         $query = $event->sender;
-        //         if ($query instanceof EntryQuery) {
-        //             if (isset($query->orderBy['calendarize.startDate'])) {
-        //                 $direction = $query->orderBy['calendarize.startDate'];
-        //                 unset($query->orderBy['calendarize.startDate']);
-        //                 $query->join[] = ['JOIN', '{{%calendarize}} calendarize', '[[entries.id]] = [[calendarize.ownerId]]'];
-        //                 $query->orderBy['calendarize.startDate'] = $direction;
-        //             }
-        //         }
-        //     }
-        // );
-
         Craft::info(
             Craft::t(
                 'calendarize',
@@ -183,7 +144,7 @@ class Calendarize extends Plugin
      */
     protected function settingsHtml(): ?string
     {
-        return Craft::$app->view->renderTemplate(
+        return \Craft::$app->view->renderTemplate(
             'calendarize/settings',
             [
                 'settings' => $this->getSettings()

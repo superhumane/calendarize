@@ -42,12 +42,12 @@ class CalendarizeValidator extends Validator {
 
         if (isset($value->endRepeat) && $value->endRepeat === 'date' && !$value->endRepeatDate) {
             return [
-                    \Craft::t(
-                        'calendarize',
-                        'End Repeat Date is required if repeating ends on date'
-                    ),
-                    []
-                ];
+                \Craft::t(
+                    'calendarize',
+                    'End Repeat Date is required if repeating ends on date'
+                ),
+                []
+            ];
         }
         
 		return null;
